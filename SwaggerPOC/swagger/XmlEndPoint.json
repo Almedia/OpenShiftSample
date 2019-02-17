@@ -1,0 +1,1633 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BAFT API",
+    "version": "0.1.9",
+    "description": "Gateway API documentation.",
+    "contact": {
+      "email": "SirilScrum@bkm.com.tr",
+      "name": "SirilScrum",
+      "url": "https://bkm.com.tr/"
+    },
+    "license": {
+      "name": "Bankalar Arası Kart Merkezi",
+      "url": "https://bkm.com.tr/"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://gateway-client-baft.cloudapps.bkm.local/",
+      "description": "Baft Servisleri"
+    }
+  ],
+  "paths": {
+    "/api/v1/auth": {
+      "post": {
+        "summary": "Authentication Service",
+        "tags": [
+          "Token"
+        ],
+        "description": "Member JWT Controller",
+        "security": [
+          {
+            "bearerAuth": [
+              "client_id",
+              "client_secret"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientCredentials"
+              },
+              "example": {
+                "client_id": "7003",
+                "client_secret": "7003",
+                "grant_type": "client_credentials"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token Bilgisi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "example": {
+                  "access_token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDAzIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwibWVtYmVyIjo3MDAzLCJleHAiOjE1NTE2MDM4MzN9.muRRvbxrqOCehUiPOuwumVh4CvE0JmVt2Si3uNW1WE5n7RvUyK7ZzhD1jFinbJ-LMKxzFYjNJI55zUUjeSBMnQ",
+                  "token_type": "Bearer",
+                  "expires_in": "259200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "examples": {
+                  "objectExample": {
+                    "$ref": "#/components/examples/UnAuthorizedExample"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/xml": {
+                "examples": {
+                  "sampleFile": {
+                    "summary": "Summary",
+                    "externalValue": "https://www.w3schools.com/xml/note.xml"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment/api/v1/payments/pacs/FIToFICustomerCreditTransferV07": {
+      "post": {
+        "summary": "Payment Service Pacs",
+        "tags": [
+          "Banka Xml Servisler"
+        ],
+        "description": "Member JWT Controller",
+        "security": [
+          {
+            "bearerAuth": [
+              "client_id",
+              "client_secret"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/customerCreditTransferXml"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token Bilgisi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "example": {
+                  "access_token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDAzIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwibWVtYmVyIjo3MDAzLCJleHAiOjE1NTE2MDM4MzN9.muRRvbxrqOCehUiPOuwumVh4CvE0JmVt2Si3uNW1WE5n7RvUyK7ZzhD1jFinbJ-LMKxzFYjNJI55zUUjeSBMnQ",
+                  "token_type": "Bearer",
+                  "expires_in": "259200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "examples": {
+                  "objectExample": {
+                    "$ref": "#/components/examples/UnAuthorizedExample"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/xml": {
+                "examples": {
+                  "sampleFile": {
+                    "summary": "Summary",
+                    "externalValue": "https://www.w3schools.com/xml/note.xml"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment/api/v1/payments/pacs/FIToFIPaymentStatusReportV09": {
+      "post": {
+        "summary": "Payment Service Pacs",
+        "tags": [
+          "Banka Xml Servisler"
+        ],
+        "description": "Member JWT Controller",
+        "security": [
+          {
+            "bearerAuth": [
+              "client_id",
+              "client_secret"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/paymentStatusReportXml"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment Status Dto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentStatusDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/payment/api/v1/payments/acmt/IdentificationVerificationRequestV02": {
+      "post": {
+        "summary": "Identitification Verification",
+        "tags": [
+          "Banka Xml Servisler"
+        ],
+        "description": "Member JWT Controller",
+        "security": [
+          {
+            "bearerAuth": [
+              "client_id",
+              "client_secret"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/IdentificationVerificationRequestV02"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Responses",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentificationVerificationReportV02"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "examples": {
+                  "objectExample": {
+                    "$ref": "#/components/examples/UnAuthorizedExample"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/xml": {
+                "examples": {
+                  "sampleFile": {
+                    "summary": "Summary",
+                    "externalValue": "https://www.w3schools.com/xml/note.xml"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "ClientCredentials": {
+        "description": "Api'lere erişim için ilgili Token İsteğinin Yapılmasını Sağlar",
+        "type": "object",
+        "properties": {
+          "client_id": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 50,
+            "description": "BKM tarafından kullanıcıya tanımlanmış kullanıcı adı bilgisi"
+          },
+          "client_secret": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 100,
+            "description": "BKM tarafından kullanıcıya tanımlanmış unique Key bilgisi"
+          },
+          "grant type": {
+            "description": "Token type",
+            "type": "string",
+            "default": "client_credentials"
+          }
+        }
+      },
+      "JWTToken": {
+        "description": "Token servis sonucunda dönen başarılı sonuç",
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "Token"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Token Type"
+          },
+          "expires_in": {
+            "type": "string",
+            "description": "Token kullanım süresi"
+          }
+        }
+      },
+      "IdentificationVerificationRequestV02": {
+        "description": "identification verification",
+        "type": "object",
+        "properties": {
+          "IdentificationVerificationRequest": {
+            "$ref": "#/components/schemas/IdentificationVerificationRequest"
+          }
+        },
+        "xml": {
+          "name": "Document",
+          "prefix": "",
+          "namespace": "http://example.com/schema"
+        }
+      },
+      "customerCreditTransferXml": {
+        "description": "",
+        "type": "object",
+        "xml": {
+          "name": "Document",
+          "prefix": "",
+          "namespace": "http://example.com/schema"
+        },
+        "properties": {
+          "FIToFICustomerCreditTransfer": {
+            "description": "",
+            "type": "object",
+            "xml": {
+              "name": "FIToFICstmrCdtTrf"
+            },
+            "properties": {
+              "GroupHeader": {
+                "$ref": "#/components/schemas/GroupHeader"
+              },
+              "CreditTransferTransactionInformation": {
+                "$ref": "#/components/schemas/CreditTransferTransactionInformation"
+              }
+            }
+          }
+        }
+      },
+      "paymentStatusReportXml": {
+        "description": "",
+        "type": "object",
+        "xml": {
+          "name": "Document",
+          "prefix": "",
+          "namespace": "http://example.com/schema"
+        },
+        "properties": {
+          "FIToFIPaymentStatusReportV09": {
+            "description": "",
+            "type": "object",
+            "xml": {
+              "name": "FIToFIPmtStsRpt"
+            },
+            "properties": {
+              "GroupHeader": {
+                "$ref": "#/components/schemas/GroupHeader"
+              },
+              "TransactionInformationAndStatus": {
+                "$ref": "#/components/schemas/TransactionInformationAndStatus"
+              }
+            }
+          }
+        }
+      },
+      "GroupHeader": {
+        "description": "Mesaj Başlığı",
+        "type": "object",
+        "xml": {
+          "name": "GrpHdr"
+        },
+        "properties": {
+          "MessageIdentification": {
+            "description": "Mesaj Referans No",
+            "type": "string",
+            "maxLength": 35,
+            "minLength": 1,
+            "xml": {
+              "name": "MsgID"
+            },
+            "example": 2.01902080046e+34
+          },
+          "CreationDateTime": {
+            "description": "Mesaj Oluşturma Zamanı",
+            "type": "string",
+            "format": "date",
+            "pattern": "YYYY-MM-DDThh:mm:ss.sss",
+            "xml": {
+              "name": "CreDtTm"
+            },
+            "example": "2019-02-08T09:35:55.704"
+          }
+        }
+      },
+      "OriginalTransactionReference": {
+        "description": "Orijinal İşlem Bilgileri",
+        "type": "object",
+        "xml": {
+          "name": "OrgnlTxRef"
+        },
+        "properties": {
+          "DebtorAgent": {
+            "$ref": "#/components/schemas/DebtorAgent"
+          },
+          "CreditorAgent": {
+            "$ref": "#/components/schemas/CreditorAgent"
+          },
+          "PaymentTypeInformation": {
+            "$ref": "#/components/schemas/PaymentTypeInformation"
+          },
+          "Purpose": {
+            "$ref": "#/components/schemas/Purpose"
+          },
+          "Debtor": {
+            "$ref": "#/components/schemas/Debtor"
+          },
+          "Creditor": {
+            "$ref": "#/components/schemas/Creditor"
+          },
+          "DebtorAccount": {
+            "$ref": "#/components/schemas/DebtorAccount"
+          },
+          "CreditorAccount": {
+            "$ref": "#/components/schemas/DebtorAccount"
+          },
+          "RemittanceInformation": {
+            "$ref": "#/components/schemas/RemittanceInformation"
+          }
+        }
+      },
+      "IdentificationVerificationRequest": {
+        "xml": {
+          "name": "IdVrfctnReq"
+        },
+        "properties": {
+          "Assignment": {
+            "$ref": "#/components/schemas/Assignment"
+          },
+          "Verification": {
+            "$ref": "#/components/schemas/Verification"
+          }
+        }
+      },
+      "IdentificationVerificationReportV02": {
+        "xml": {
+          "name": "Document",
+          "namespace": "https://www.w3schools.com/xml/note.xml"
+        },
+        "properties": {
+          "IdentificationVerificationReport": {
+            "type": "object",
+            "properties": {
+              "Assgnmt": {
+                "$ref": "#/components/schemas/Assignment"
+              },
+              "Report": {
+                "type": "object",
+                "xml": {
+                  "name": "Rpt"
+                },
+                "properties": {
+                  "OriginalIdentification": {
+                    "type": "string",
+                    "description": "Doğrulama Referans No",
+                    "xml": {
+                      "name": "OrgnlId"
+                    },
+                    "example": 2.01902127003e+34
+                  },
+                  "Verification": {
+                    "type": "string",
+                    "xml": {
+                      "name": "Vrfctn"
+                    },
+                    "example": "true"
+                  },
+                  "Reason": {
+                    "description": "Doğrulama Hata Nedeni",
+                    "xml": {
+                      "name": "Rsn"
+                    },
+                    "properties": {
+                      "Proprietary": {
+                        "description": "Doğrulama Hata Nedeni Özel Kodu",
+                        "type": "string",
+                        "maxLength": 35,
+                        "minLength": 1,
+                        "xml": {
+                          "name": "Prtry"
+                        }
+                      }
+                    }
+                  },
+                  "UpdatedPartyAndAccountIdentification": {
+                    "description": "Sonuç Kişi/Kurum ya da Hesap Bilgileri    (IdentificationInformation2)",
+                    "xml": {
+                      "name": "UpdtdPtyAndAcctId"
+                    },
+                    "properties": {
+                      "Party": {
+                        "description": "Kişi/Kurum Bilgileri",
+                        "type": "object",
+                        "xml": {
+                          "name": "Pty"
+                        },
+                        "properties": {
+                          "Name": {
+                            "type": "string",
+                            "description": "Ad",
+                            "xml": {
+                              "name": "Nm"
+                            },
+                            "example": "Administrator Administrator"
+                          },
+                          "Identification": {
+                            "description": "Kişi ya da Kurum Bilgileri",
+                            "xml": {
+                              "name": "Id"
+                            },
+                            "properties": {
+                              "OrganisationIdentification": {
+                                "description": "Kurum Kimlik Bilgileri",
+                                "type": "object",
+                                "xml": {
+                                  "name": "OrgId"
+                                },
+                                "properties": {
+                                  "Other": {
+                                    "xml": {
+                                      "name": "Othr"
+                                    },
+                                    "properties": {
+                                      "Identification": {
+                                        "type": "string",
+                                        "description": "Kurum Kimlik Değeri",
+                                        "xml": {
+                                          "name": "Id"
+                                        },
+                                        "maxLength": 35,
+                                        "minLength": 1
+                                      },
+                                      "SchemeName": {
+                                        "type": "string",
+                                        "description": "Kurum Kimlik Tipi",
+                                        "xml": {
+                                          "name": "SchmeNm"
+                                        },
+                                        "properties": {
+                                          "Proprietary": {
+                                            "type": "string",
+                                            "xml": {
+                                              "name": "Prtry"
+                                            },
+                                            "maxLength": 35,
+                                            "minLength": 1
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "PrivateIdentification": {
+                                "description": "Kişi Kimlik Bilgileri",
+                                "xml": {
+                                  "name": "PrvtId"
+                                },
+                                "type": "object",
+                                "properties": {
+                                  "Other": {
+                                    "type": "object",
+                                    "xml": {
+                                      "name": "Othr"
+                                    },
+                                    "properties": {
+                                      "Identification": {
+                                        "description": "Kişi Kimlik Değeri",
+                                        "xml": {
+                                          "name": "Id"
+                                        },
+                                        "example": "A"
+                                      },
+                                      "SchemeName": {
+                                        "description": "Kişi Kimlik Tipi",
+                                        "xml": {
+                                          "name": "SchmeNm"
+                                        },
+                                        "properties": {
+                                          "Proprietary": {
+                                            "xml": {
+                                              "name": "Prtry"
+                                            },
+                                            "maxLength": 35,
+                                            "minLength": 1,
+                                            "example": "TR290700300000000705597584"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "Account": {
+                        "type": "object",
+                        "xml": {
+                          "name": "Acct"
+                        },
+                        "properties": {
+                          "IBAN": {
+                            "type": "string",
+                            "xml": {
+                              "name": "IBAN"
+                            },
+                            "example": "TR290700300000000705597584"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreditTransferTransactionInformation": {
+        "description": "İşlem Bilgileri (CreditTransferTransaction30)",
+        "type": "object",
+        "xml": {
+          "name": "CdtTrfTxInf"
+        },
+        "properties": {
+          "DebtorAgent": {
+            "$ref": "#/components/schemas/DebtorAgent"
+          },
+          "CreditorAgent": {
+            "$ref": "#/components/schemas/CreditorAgent"
+          },
+          "PaymentIdentification": {
+            "$ref": "#/components/schemas/PaymentIdentification"
+          },
+          "Purpose": {
+            "$ref": "#/components/schemas/Purpose"
+          },
+          "PaymentTypeInformation": {
+            "$ref": "#/components/schemas/PaymentTypeInformation"
+          },
+          "InterbankSettlementAmount": {
+            "type": "object",
+            "properties": {
+              "_Ccy": {
+                "type": "string",
+                "example": "TRY"
+              },
+              "__text": {
+                "type": "string",
+                "example": 1500
+              }
+            },
+            "xml": {
+              "name": "IntrBkSttlmAmt"
+            }
+          },
+          "InterbankSettlementDate": {
+            "description": "Hesaplaşma Tarihi",
+            "type": "string",
+            "format": "date",
+            "minLength": 10,
+            "maxLength": 10,
+            "xml": {
+              "name": "IntrBkSttlmDt"
+            },
+            "example": "2018-07-05T00:00:00.000Z"
+          },
+          "AcceptanceDateTime": {
+            "description": "İşlem Zamanı",
+            "type": "string",
+            "format": "date",
+            "minLength": 23,
+            "maxLength": 23,
+            "xml": {
+              "name": "AccptncDtTm"
+            },
+            "example": "2018-07-05T11:24:22:222"
+          },
+          "ChargeBearer": {
+            "description": "Komisyon Yüklenicisi",
+            "type": "string",
+            "xml": {
+              "name": "ChrgBr"
+            },
+            "minLength": 4,
+            "maxLength": 4,
+            "example": "SLEV"
+          },
+          "ChargesInformation": {
+            "$ref": "#/components/schemas/ChargesInformation"
+          },
+          "Debtor": {
+            "$ref": "#/components/schemas/Debtor"
+          },
+          "DebtorAccount": {
+            "$ref": "#/components/schemas/DebtorAccount"
+          },
+          "Creditor": {
+            "$ref": "#/components/schemas/Creditor"
+          },
+          "CreditorAccount": {
+            "$ref": "#/components/schemas/CreditorAccount"
+          },
+          "RemittanceInformation": {
+            "$ref": "#/components/schemas/RemittanceInformation"
+          }
+        }
+      },
+      "PaymentStatusDto": {
+        "description": "Payment Status Dto",
+        "properties": {
+          "PaymentStatus": {
+            "type": "string",
+            "example": "ACSC"
+          },
+          "StatusReason": {
+            "type": "object",
+            "properties": {
+              "Code": {
+                "type": "string",
+                "example": 1007
+              },
+              "Description": {
+                "type": "string",
+                "example": "Ödeme işlemi hesaplaşma tamamlandı"
+              }
+            }
+          }
+        }
+      },
+      "TransactionInformationAndStatus": {
+        "description": "İşlem Bilgileri",
+        "type": "object",
+        "xml": {
+          "name": "TxInfAndSts"
+        },
+        "properties": {
+          "OriginalInstructionIdentification": {
+            "description": "Orijinal Yönlendirici İşlem Referans No",
+            "type": "string",
+            "xml": {
+              "name": "originalPaymentId"
+            },
+            "example": "orgnlendtoendid201901290046000001425392259451454"
+          },
+          "OriginalEndToEndIdentification": {
+            "description": "Orijinal Gönderici İşlem Referans No",
+            "type": "string",
+            "xml": {
+              "name": "debtorPaymentId"
+            },
+            "example": "orgnlendtoendid201901290046000001425392259451454"
+          },
+          "OriginalTransactionIdentification": {
+            "description": "Orijinal Gönderici Katılımcı İşlem Referans No",
+            "type": "string",
+            "xml": {
+              "name": "debtorAgentPaymentId"
+            },
+            "example": "orgnlendtoendid201901290046000001425392259451454"
+          },
+          "ClearingSystemReference": {
+            "description": "Takas Merkezi İşlem Referans No",
+            "type": "string",
+            "xml": {
+              "name": "ClrSysRef"
+            },
+            "example": "orgnlendtoendid201901290046000001425392259451454"
+          },
+          "TransactionStatus": {
+            "description": "İşlem Durumu",
+            "type": "string",
+            "xml": {
+              "name": "TxSts"
+            },
+            "example": "orgnlendtoendid201901290046000001425392259451454"
+          },
+          "StatusReasonInformation": {
+            "type": "object",
+            "xml": {
+              "name": "StsRsnInf"
+            },
+            "properties": {
+              "Reason": {
+                "type": "object",
+                "xml": {
+                  "name": "Rsn"
+                },
+                "properties": {
+                  "Proprietary": {
+                    "type": "string",
+                    "xml": {
+                      "name": "Prtry"
+                    },
+                    "example": 1004
+                  }
+                }
+              },
+              "AdditionalInformation": {
+                "description": "Açıklama",
+                "type": "string",
+                "xml": {
+                  "name": "AddtlInf"
+                }
+              }
+            }
+          },
+          "ChargesInformation": {
+            "$ref": "#/components/schemas/ChargesInformation"
+          },
+          "ClrSysRef": {
+            "type": "number",
+            "example": 2.01902088e+34
+          },
+          "OriginalTransactionReference": {
+            "$ref": "#/components/schemas/OriginalTransactionReference"
+          }
+        }
+      },
+      "Agent": {
+        "type": "object",
+        "properties": {
+          "FinancialInstitutionIdentification": {
+            "type": "object",
+            "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.(ISO type FinancialInstitutionIdentification8)",
+            "xml": {
+              "name": "FinInstnId"
+            },
+            "properties": {
+              "ClearingSystemMemberIdentification": {
+                "type": "object",
+                "description": "Takas Merkezi Katılımcı Bilgileri",
+                "xml": {
+                  "name": "ClrSysMmbId"
+                },
+                "properties": {
+                  "MemberIdentification": {
+                    "type": "string",
+                    "description": "Takas Merkezi Katılımcı Kodu",
+                    "minLength": 1,
+                    "maxLength": 35,
+                    "example": 38,
+                    "xml": {
+                      "name": "MmbId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "DebtorAgent": {
+        "type": "object",
+        "xml": {
+          "name": "DbtrAgt"
+        },
+        "properties": {
+          "FinancialInstitutionIdentification": {
+            "type": "object",
+            "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.(ISO type FinancialInstitutionIdentification8)",
+            "xml": {
+              "name": "FinInstnId"
+            },
+            "properties": {
+              "ClearingSystemMemberIdentification": {
+                "type": "object",
+                "description": "Takas Merkezi Katılımcı Bilgileri",
+                "xml": {
+                  "name": "ClrSysMmbId"
+                },
+                "properties": {
+                  "MemberIdentification": {
+                    "type": "string",
+                    "description": "Takas Merkezi Katılımcı Kodu",
+                    "minLength": 1,
+                    "maxLength": 35,
+                    "example": 38,
+                    "xml": {
+                      "name": "MmbId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreditorAgent": {
+        "type": "object",
+        "xml": {
+          "name": "CdtrAgt"
+        },
+        "properties": {
+          "FinancialInstitutionIdentification": {
+            "type": "object",
+            "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.(ISO type FinancialInstitutionIdentification8)",
+            "xml": {
+              "name": "FinInstnId"
+            },
+            "properties": {
+              "ClearingSystemMemberIdentification": {
+                "type": "object",
+                "description": "Takas Merkezi Katılımcı Bilgileri",
+                "xml": {
+                  "name": "ClrSysMmbId"
+                },
+                "properties": {
+                  "MemberIdentification": {
+                    "type": "string",
+                    "description": "Takas Merkezi Katılımcı Kodu",
+                    "minLength": 1,
+                    "maxLength": 35,
+                    "example": 38,
+                    "xml": {
+                      "name": "MmbId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "PaymentIdentification": {
+        "description": "PmtId",
+        "type": "object",
+        "xml": {
+          "name": "PmtId"
+        },
+        "properties": {
+          "InstructionIdentification": {
+            "description": "Yönlendirici İşlem Referans No",
+            "type": "string",
+            "xml": {
+              "name": "InstrId"
+            },
+            "minLength": 1,
+            "maxLength": 35,
+            "example": ""
+          },
+          "EndToEndIdentification": {
+            "description": "Gönderici İşlem Referans No",
+            "type": "string",
+            "xml": {
+              "name": "EndToEndId"
+            },
+            "minLength": 1,
+            "maxLength": 35,
+            "example": 2.01901290046e+32
+          },
+          "TransactionIdentification": {
+            "description": "Gönderici Katılımcı İşlem Referans No",
+            "type": "string",
+            "xml": {
+              "name": "TxId"
+            },
+            "example": 2.01902080046e+34,
+            "minLength": 1,
+            "maxLength": 35
+          },
+          "ClearingSystemReference": {
+            "description": "Takas Merkezi İşlem Referans No",
+            "type": "string",
+            "xml": {
+              "name": "ClrSysRef"
+            },
+            "example": 2.01902080046e+34,
+            "minLength": 1,
+            "maxLength": 35
+          }
+        }
+      },
+      "PaymentTypeInformation": {
+        "description": "İşlem Tipi Bilgileri",
+        "type": "object",
+        "xml": {
+          "name": "PmtTpInf"
+        },
+        "properties": {
+          "CategoryPurpose": {
+            "$ref": "#/components/schemas/CategoryPurpose"
+          },
+          "LclInstrm": {
+            "$ref": "#/components/schemas/LocalInstrument"
+          }
+        }
+      },
+      "LocalInstrument": {
+        "description": "Ödeme Kanalı",
+        "type": "object",
+        "properties": {
+          "Proprietary": {
+            "type": "string",
+            "xml": {
+              "name": "Prtry"
+            },
+            "example": "P001"
+          }
+        }
+      },
+      "CategoryPurpose": {
+        "description": "İşlem Tipi",
+        "type": "object",
+        "properties": {
+          "Proprietary": {
+            "type": "string",
+            "example": "P001",
+            "xml": {
+              "name": "Prtry"
+            }
+          }
+        }
+      },
+      "Purpose": {
+        "description": "İşlem Alt Tipi",
+        "type": "object",
+        "xml": {
+          "name": "Purp"
+        },
+        "properties": {
+          "Proprietary": {
+            "description": "İşlem Alt Tipi",
+            "type": "string",
+            "xml": {
+              "name": "Prtry"
+            },
+            "example": "",
+            "minLength": 1,
+            "maxLength": 35
+          }
+        }
+      },
+      "ChargesInformation": {
+        "description": "Komisyon Bilgisi",
+        "type": "object",
+        "xml": {
+          "name": "ChrgsInf"
+        },
+        "properties": {
+          "Amount": {
+            "description": "Tutar",
+            "xml": {
+              "name": "Amt"
+            }
+          },
+          "Agent": {
+            "$ref": "#/components/schemas/Agent"
+          }
+        }
+      },
+      "Debtor": {
+        "description": "Gönderici Bilgileri",
+        "type": "object",
+        "xml": {
+          "name": "Dbtr"
+        },
+        "properties": {
+          "Name": {
+            "description": "Nm",
+            "type": "string",
+            "xml": {
+              "name": "Nm"
+            },
+            "example": "Administrator Administrator"
+          },
+          "Identification": {
+            "description": "Kişi ya da Kurum Bilgileri",
+            "xml": {
+              "name": "Id"
+            },
+            "properties": {
+              "OrganisationIdentification": {
+                "description": "Gönderici Kimlik Bilgileri",
+                "type": "object",
+                "xml": {
+                  "name": "OrgId"
+                },
+                "properties": {
+                  "Other": {
+                    "xml": {
+                      "name": "Othr"
+                    },
+                    "properties": {
+                      "Identification": {
+                        "type": "string",
+                        "description": "Gönderici Kimlik Değeri",
+                        "xml": {
+                          "name": "Id"
+                        },
+                        "maxLength": 35,
+                        "minLength": 1
+                      },
+                      "SchemeName": {
+                        "type": "string",
+                        "description": "Gönderici Kimlik Tipi",
+                        "xml": {
+                          "name": "SchmeNm"
+                        },
+                        "properties": {
+                          "Proprietary": {
+                            "type": "string",
+                            "xml": {
+                              "name": "Prtry"
+                            },
+                            "maxLength": 35,
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "PrivateIdentification": {
+                "description": "Kişi Kimlik Bilgileri",
+                "type": "object",
+                "xml": {
+                  "name": "PrvtId"
+                },
+                "properties": {
+                  "Other": {
+                    "type": "object",
+                    "xml": {
+                      "name": "Othr"
+                    },
+                    "properties": {
+                      "Identification": {
+                        "description": "Kişi Kimlik Değeri",
+                        "xml": {
+                          "name": "Id"
+                        },
+                        "example": "A"
+                      },
+                      "SchemeName": {
+                        "description": "Kişi Kimlik Tipi",
+                        "xml": {
+                          "name": "SchmeNm"
+                        },
+                        "properties": {
+                          "Proprietary": {
+                            "xml": {
+                              "name": "Prtry"
+                            },
+                            "maxLength": 35,
+                            "minLength": 1,
+                            "example": "TR290700300000000705597584"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "DebtorAccount": {
+        "type": "object",
+        "description": "Hesap Bilgileri (AccountIdentification4Choice)",
+        "xml": {
+          "name": "DbtrAcct"
+        },
+        "properties": {
+          "Identification": {
+            "description": "Other",
+            "type": "object",
+            "xml": {
+              "name": "Id"
+            },
+            "properties": {
+              "IBAN": {
+                "type": "string",
+                "description": "IBAN",
+                "xml": {
+                  "name": "IBAN"
+                },
+                "example": "TR730004600000000810458198"
+              }
+            }
+          }
+        }
+      },
+      "Creditor": {
+        "description": "Gönderici Bilgileri",
+        "type": "object",
+        "xml": {
+          "name": "Cdtr"
+        },
+        "properties": {
+          "Name": {
+            "description": "Nm",
+            "type": "string",
+            "xml": {
+              "name": "Nm"
+            },
+            "example": "Administrator Administrator"
+          },
+          "Identification": {
+            "description": "Kişi ya da Kurum Bilgileri",
+            "xml": {
+              "name": "Id"
+            },
+            "properties": {
+              "OrganisationIdentification": {
+                "description": "Gönderici Kimlik Bilgileri",
+                "type": "object",
+                "xml": {
+                  "name": "OrgId"
+                },
+                "properties": {
+                  "Other": {
+                    "xml": {
+                      "name": "Othr"
+                    },
+                    "properties": {
+                      "Identification": {
+                        "type": "string",
+                        "description": "Gönderici Kimlik Değeri",
+                        "xml": {
+                          "name": "Id"
+                        },
+                        "maxLength": 35,
+                        "minLength": 1
+                      },
+                      "SchemeName": {
+                        "type": "string",
+                        "description": "Gönderici Kimlik Tipi",
+                        "xml": {
+                          "name": "SchmeNm"
+                        },
+                        "properties": {
+                          "Proprietary": {
+                            "type": "string",
+                            "xml": {
+                              "name": "Prtry"
+                            },
+                            "maxLength": 35,
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "PrivateIdentification": {
+                "description": "Kişi Kimlik Bilgileri",
+                "type": "object",
+                "xml": {
+                  "name": "PrvtId"
+                },
+                "properties": {
+                  "Other": {
+                    "type": "object",
+                    "xml": {
+                      "name": "Othr"
+                    },
+                    "properties": {
+                      "Identification": {
+                        "description": "Kişi Kimlik Değeri",
+                        "xml": {
+                          "name": "Id"
+                        },
+                        "example": "A"
+                      },
+                      "SchemeName": {
+                        "description": "Kişi Kimlik Tipi",
+                        "xml": {
+                          "name": "SchmeNm"
+                        },
+                        "properties": {
+                          "Proprietary": {
+                            "xml": {
+                              "name": "Prtry"
+                            },
+                            "maxLength": 35,
+                            "minLength": 1,
+                            "example": "TR290700300000000705597584"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreditorAccount": {
+        "type": "object",
+        "description": "Hesap Bilgileri (AccountIdentification4Choice)",
+        "xml": {
+          "name": "CdtrAcct"
+        },
+        "properties": {
+          "Identification": {
+            "description": "Other",
+            "type": "object",
+            "xml": {
+              "name": "Id"
+            },
+            "properties": {
+              "IBAN": {
+                "type": "string",
+                "description": "IBAN",
+                "xml": {
+                  "name": "IBAN"
+                },
+                "example": "TR730004600000000810458198"
+              }
+            }
+          }
+        }
+      },
+      "RemittanceInformation": {
+        "description": "Transfer Bilgileri",
+        "type": "object",
+        "xml": {
+          "name": "RmtInf"
+        },
+        "properties": {
+          "Unstructured": {
+            "description": "Açıklama",
+            "type": "string",
+            "xml": {
+              "name": "Ustrd"
+            }
+          },
+          "Structured": {
+            "description": "Ek Transfer Bilgileri",
+            "type": "object",
+            "xml": {
+              "name": "Strd"
+            },
+            "properties": {
+              "AdditionalRemittanceInformation": {
+                "description": "Açıklama",
+                "type": "string",
+                "xml": {
+                  "name": "AddtlRmtInf"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Assignment": {
+        "description": "Mesaj Başlığı (IdentificationAssignment2)",
+        "type": "object",
+        "xml": {
+          "name": "Assgnm"
+        },
+        "properties": {
+          "MessageIdentification": {
+            "type": "string",
+            "description": "Her mesajda değişen, mesaja özel referans numarası bilgisinin bulunduğu alandır. Mesajı oluşturan sistem belirler.",
+            "maxLength": 35,
+            "minLength": 1,
+            "xml": {
+              "name": "MsgId"
+            },
+            "example": 2.01902127003e+34
+          },
+          "CreationDateTime": {
+            "type": "string",
+            "format": "date",
+            "description": "Mesaj Oluşturma Zamanı (Her mesajda değişen, mesajın oluşturulduğu zaman bilgisinin bulunduğu alandır.)",
+            "xml": {
+              "name": "CreDtTm"
+            },
+            "example": "2019-02-12T10:18:13.084Z"
+          },
+          "Assigner": {
+            "type": "object",
+            "description": "Gönderici Katılımcı Bilgileri  (ISO type Party12Choice)",
+            "xml": {
+              "name": "Assgnr"
+            },
+            "properties": {
+              "Agent": {
+                "$ref": "#/components/schemas/Agent"
+              }
+            }
+          },
+          "Assignee": {
+            "type": "object",
+            "description": "Assgne",
+            "xml": {
+              "name": "Assgne"
+            },
+            "properties": {
+              "Agent": {
+                "$ref": "#/components/schemas/Agent"
+              }
+            }
+          }
+        }
+      },
+      "Verification": {
+        "description": "Doğrulama Bilgileri (IdentificationVerification2)",
+        "type": "object",
+        "xml": {
+          "name": "Vrfctn"
+        },
+        "properties": {
+          "Identification": {
+            "type": "string",
+            "xml": {
+              "name": "Id"
+            },
+            "maxLength": 35,
+            "minLength": 1,
+            "example": 2.01902127003e+34
+          },
+          "PartyAndAccountIdentification": {
+            "description": "Kişi/Kurum ya da Hesap Bilgileri  (IdentificationInformation2)",
+            "type": "object",
+            "xml": {
+              "name": "PtyAndAcctId"
+            },
+            "properties": {
+              "Party": {
+                "$ref": "#/components/schemas/Party"
+              },
+              "Account": {
+                "type": "object",
+                "description": "Hesap Bilgileri",
+                "xml": {
+                  "name": "Acct"
+                },
+                "properties": {
+                  "IBAN": {
+                    "description": "IBAN (IBAN2007Identifier)",
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 35,
+                    "pattern": "[A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}",
+                    "xml": {
+                      "name": "IBAN"
+                    },
+                    "example": "TR290700300000000705597584"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Party": {
+        "description": "Kişi/Kurum Bilgileri (ISO TYPE PartyIdentification43)",
+        "type": "object",
+        "xml": {
+          "name": "Pty"
+        },
+        "properties": {
+          "Identification": {
+            "type": "object",
+            "description": "Kişi/Kurum Kimlik Bilgileri (Party11Choice)",
+            "xml": {
+              "name": "Id"
+            },
+            "properties": {
+              "OrganisationIdentification": {
+                "description": "Kurum Kimlik Bilgileri",
+                "type": "object",
+                "xml": {
+                  "name": "OrgId"
+                },
+                "properties": {
+                  "Other": {
+                    "xml": {
+                      "name": "Othr"
+                    },
+                    "properties": {
+                      "Identification": {
+                        "type": "string",
+                        "description": "Kurum Kimlik Değeri",
+                        "xml": {
+                          "name": "Id"
+                        },
+                        "maxLength": 35,
+                        "minLength": 1
+                      },
+                      "SchemeName": {
+                        "type": "string",
+                        "description": "Kurum Kimlik Tipi",
+                        "xml": {
+                          "name": "SchmeNm"
+                        },
+                        "properties": {
+                          "Proprietary": {
+                            "type": "string",
+                            "xml": {
+                              "name": "Prtry"
+                            },
+                            "maxLength": 35,
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "PrivateIdentification": {
+                "description": "Kişi Kimlik Bilgileri",
+                "xml": {
+                  "name": "PrvtId"
+                },
+                "type": "object",
+                "properties": {
+                  "Other": {
+                    "type": "object",
+                    "xml": {
+                      "name": "Othr"
+                    },
+                    "properties": {
+                      "Identification": {
+                        "description": "Kişi Kimlik Değeri",
+                        "xml": {
+                          "name": "Id"
+                        },
+                        "example": "A"
+                      },
+                      "SchemeName": {
+                        "description": "Kişi Kimlik Tipi",
+                        "xml": {
+                          "name": "SchmeNm"
+                        },
+                        "properties": {
+                          "Proprietary": {
+                            "xml": {
+                              "name": "Prtry"
+                            },
+                            "maxLength": 35,
+                            "minLength": 1,
+                            "example": "TR290700300000000705597584"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "UnAuthorizedExample": {
+        "value": {
+          "type": "https://www.baft.tech/problem/problem-with-message",
+          "title": "Unauthorized",
+          "status": "401",
+          "detail": "Bad credentials",
+          "path": "/api/v1/auth",
+          "message": "error.http.401"
+        }
+      }
+    }
+  }
+}

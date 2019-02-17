@@ -1,0 +1,10 @@
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/bin/Debug/netcoreapp2.0/SwaggerPOC.deps.json
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/bin/Debug/netcoreapp2.0/SwaggerPOC.runtimeconfig.json
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/bin/Debug/netcoreapp2.0/SwaggerPOC.runtimeconfig.dev.json
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/bin/Debug/netcoreapp2.0/SwaggerPOC.dll
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/bin/Debug/netcoreapp2.0/SwaggerPOC.pdb
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/obj/Debug/netcoreapp2.0/SwaggerPOC.csproj.CoreCompileInputs.cache
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/obj/Debug/netcoreapp2.0/SwaggerPOC.AssemblyInfoInputs.cache
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/obj/Debug/netcoreapp2.0/SwaggerPOC.AssemblyInfo.cs
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/obj/Debug/netcoreapp2.0/SwaggerPOC.dll
+/Users/bahadirozdemir/Projects/Swagger/SwaggerPOC/obj/Debug/netcoreapp2.0/SwaggerPOC.pdb

@@ -1,0 +1,819 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BAFT API",
+    "version": "0.1.9",
+    "description": "Gateway API documentation.",
+    "contact": {
+      "email": "SirilScrum@bkm.com.tr",
+      "name": "SirilScrum",
+      "url": "https://bkm.com.tr/"
+    },
+    "license": {
+      "name": "Bankalar Arası Kart Merkezi",
+      "url": "https://bkm.com.tr/"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://gateway-client-baft.cloudapps.bkm.local/",
+      "description": "Baft Servisleri"
+    }
+  ],
+  "paths": {
+    "/api/v1/auth": {
+      "post": {
+        "summary": "Authentication Service",
+        "tags": [
+          "Token"
+        ],
+        "description": "Member JWT Controller",
+        "security": [
+          {
+            "bearerAuth": [
+              "client_id",
+              "client_secret"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientCredentials"
+              },
+              "example": {
+                "client_id": "7003",
+                "client_secret": "7003",
+                "grant_type": "client_credentials"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token Bilgisi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "example": {
+                  "access_token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDAzIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwibWVtYmVyIjo3MDAzLCJleHAiOjE1NTE2MDM4MzN9.muRRvbxrqOCehUiPOuwumVh4CvE0JmVt2Si3uNW1WE5n7RvUyK7ZzhD1jFinbJ-LMKxzFYjNJI55zUUjeSBMnQ",
+                  "token_type": "Bearer",
+                  "expires_in": "259200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "examples": {
+                  "objectExample": {
+                    "$ref": "#/components/examples/UnAuthorizedExample"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/xml": {
+                "examples": {
+                  "sampleFile": {
+                    "summary": "Summary",
+                    "externalValue": "https://www.w3schools.com/xml/note.xml"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment/api/v1/payments/payment": {
+      "post": {
+        "summary": "Payment Service",
+        "tags": [
+          "Banka Servisleri"
+        ],
+        "description": "Member JWT Controller",
+        "security": [
+          {
+            "bearerAuth": [
+              "client_id",
+              "client_secret"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token Bilgisi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "example": {
+                  "access_token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDAzIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwibWVtYmVyIjo3MDAzLCJleHAiOjE1NTE2MDM4MzN9.muRRvbxrqOCehUiPOuwumVh4CvE0JmVt2Si3uNW1WE5n7RvUyK7ZzhD1jFinbJ-LMKxzFYjNJI55zUUjeSBMnQ",
+                  "token_type": "Bearer",
+                  "expires_in": "259200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "examples": {
+                  "objectExample": {
+                    "$ref": "#/components/examples/UnAuthorizedExample"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/xml": {
+                "examples": {
+                  "sampleFile": {
+                    "summary": "Summary",
+                    "externalValue": "https://www.w3schools.com/xml/note.xml"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Payment Query Service",
+        "tags": [
+          "Banka Servisleri"
+        ],
+        "description": "Member JWT Controller",
+        "security": [
+          {
+            "bearerAuth": [
+              "client_id",
+              "client_secret"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "debtorAgentPaymentId",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            },
+            "description": "debtorAgentPaymentId"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number of the requested page",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "paymentId",
+            "description": "paymentId",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "description": "Size of Page",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "Sorting criteria in the format property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token Bilgisi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "example": {
+                  "access_token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDAzIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwibWVtYmVyIjo3MDAzLCJleHAiOjE1NTE2MDM4MzN9.muRRvbxrqOCehUiPOuwumVh4CvE0JmVt2Si3uNW1WE5n7RvUyK7ZzhD1jFinbJ-LMKxzFYjNJI55zUUjeSBMnQ",
+                  "token_type": "Bearer",
+                  "expires_in": "259200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "examples": {
+                  "objectExample": {
+                    "$ref": "#/components/examples/UnAuthorizedExample"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/xml": {
+                "examples": {
+                  "sampleFile": {
+                    "summary": "Summary",
+                    "externalValue": "https://www.w3schools.com/xml/note.xml"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment/api/v1/payments/payment/{paymentId}/status": {
+      "post": {
+        "summary": "Payment Service",
+        "tags": [
+          "Banka Servisleri"
+        ],
+        "description": "Member JWT Controller",
+        "security": [
+          {
+            "bearerAuth": [
+              "client_id",
+              "client_secret"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paymentId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            },
+            "description": "Payment Id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentStatusReportDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token Bilgisi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "example": {
+                  "access_token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDAzIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwibWVtYmVyIjo3MDAzLCJleHAiOjE1NTE2MDM4MzN9.muRRvbxrqOCehUiPOuwumVh4CvE0JmVt2Si3uNW1WE5n7RvUyK7ZzhD1jFinbJ-LMKxzFYjNJI55zUUjeSBMnQ",
+                  "token_type": "Bearer",
+                  "expires_in": "259200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTToken"
+                },
+                "examples": {
+                  "objectExample": {
+                    "$ref": "#/components/examples/UnAuthorizedExample"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/xml": {
+                "examples": {
+                  "sampleFile": {
+                    "summary": "Summary",
+                    "externalValue": "https://www.w3schools.com/xml/note.xml"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "ClientCredentials": {
+        "description": "Api'lere erişim için ilgili Token İsteğinin Yapılmasını Sağlar",
+        "type": "object",
+        "properties": {
+          "client_id": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 50,
+            "description": "BKM tarafından kullanıcıya tanımlanmış kullanıcı adı bilgisi"
+          },
+          "client_secret": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 100,
+            "description": "BKM tarafından kullanıcıya tanımlanmış unique Key bilgisi"
+          },
+          "grant type": {
+            "description": "Token type",
+            "type": "string",
+            "default": "client_credentials"
+          }
+        }
+      },
+      "PaymentDTO": {
+        "description": "Ödeme Mesajı",
+        "type": "object",
+        "properties": {
+          "creationDateTime": {
+            "description": "Mesaj Oluşturma Zamanı   (Her mesajda değişen, mesajın oluşturulduğu zaman bilgisinin                bulunduğu alandır. YYYY-MM-DDThh:mm:ss.sss formatında olmalıdır.)",
+            "type": "string",
+            "format": "date",
+            "minLength": 23,
+            "maxLength": 23,
+            "pattern": "YYYY-MM-DDThh:mm:ss.sss",
+            "example": "2019-02-07T08:11:46.271Z"
+          },
+          "debtorAgent": {
+            "description": "Gönderici Katılımcı Bilgileri (Mesajın kaynağı olan Gönderici Katılımcıya ait üye kodunu             ifade eder. Üyenin BKM de tanımlı EFT Kodu olmalıdır.)",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 35
+          },
+          "acceptanceDateTime": {
+            "type": "string",
+            "description": "İşlem Zamanı",
+            "example": "2019-02-07T08:11:46.271Z",
+            "minLength": 23
+          },
+          "additionalInfo": {
+            "$ref": "#/components/schemas/PaymentAdditionalInfoDTO"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Tutar",
+            "example": 1000
+          },
+          "charges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentChargeDTO"
+            },
+            "description": "Komisyon Bilgisi"
+          },
+          "creditor": {
+            "summary": "Alıcı Bilgileri",
+            "description": "Alıcı Bilgileri",
+            "type": "object",
+            "$ref": "#/components/schemas/PaymentCustomerDTO"
+          },
+          "creditorAgent": {
+            "description": "Alıcı Katılımcı Bilgileri",
+            "type": "integer"
+          },
+          "currencyCode": {
+            "description": "Para Birimi",
+            "type": "string"
+          },
+          "debtor": {
+            "summary": "Gönderici Bilgileri",
+            "type": "object",
+            "$ref": "#/components/schemas/PaymentCustomerDTO"
+          },
+          "debtorAgentPaymentId": {
+            "type": "string",
+            "description": "Gönderici Katılımcı İşlem Referans No",
+            "minLength": 1,
+            "maxLength": 35,
+            "example": 2.01901290064e+34
+          },
+          "debtorPaymentId": {
+            "type": "string",
+            "description": "Gönderici İşlem Referans No",
+            "minLength": 1,
+            "maxLength": 35,
+            "example": 2.01901290064e+34
+          },
+          "description": {
+            "description": "dasdsa",
+            "type": "string"
+          },
+          "originalPaymentId": {
+            "type": "string",
+            "description": "Yönlendirici İşlem Referans No",
+            "minLength": 1,
+            "maxLength": 35,
+            "example": 2.01901290064e+34
+          },
+          "paymentChannel": {
+            "type": "string",
+            "description": "Ödeme Kanalı"
+          },
+          "paymentId": {
+            "type": "string",
+            "description": "Takas Merkezi İşlem Referans No",
+            "example": 2.01901290064e+34
+          },
+          "paymentStatus": {
+            "description": "test",
+            "type": "string"
+          },
+          "paymentSubType": {
+            "type": "string",
+            "description": "İşlem Alt Tipi",
+            "minLength": 1,
+            "maxLength": 35
+          },
+          "paymentType": {
+            "type": "string",
+            "description": "İşlem Tipi",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PaymentType"
+            }
+          },
+          "settlementDate": {
+            "description": "Hesaplaşma Tarihi",
+            "type": "string",
+            "example": "2019-02-07"
+          },
+          "statusReason": {
+            "description": "test",
+            "type": "object",
+            "$ref": "#/components/schemas/StatusReasonDTO"
+          }
+        }
+      },
+      "PaymentAdditionalInfoDTO": {
+        "description": "Ek Transfer Bilgileri",
+        "type": "object",
+        "properties": {
+          "remittanceInformations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PaymentChargeDTO": {
+        "description": "Charge Bilgileri",
+        "type": "object",
+        "properties": {
+          "agent": {
+            "type": "number",
+            "description": "Katılımcı",
+            "example": 21
+          },
+          "amount": {
+            "type": "number",
+            "description": "Tutar",
+            "example": 123
+          },
+          "currencyCode": {
+            "type": "string",
+            "description": "Komisyon Para Birimi",
+            "example": "TRY"
+          }
+        }
+      },
+      "PaymentCustomerDTO": {
+        "properties": {
+          "iban": {
+            "type": "string",
+            "description": "Iban",
+            "example": "TR640006400000000465340503",
+            "minLength": 5,
+            "maxLength": 35
+          },
+          "identifications": {
+            "type": "array",
+            "items": {
+              "description": null,
+              "$ref": "#/components/schemas/PaymentCustomerIdentificationDTO"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Alıcı Adı",
+            "minLength": 5,
+            "maxLength": 35,
+            "example": "Bahadır ÖZDEMİR"
+          },
+          "type": {
+            "type": "string",
+            "description": "Alıcı Tipi",
+            "minLength": 1,
+            "maxLength": 1,
+            "example": "P"
+          }
+        }
+      },
+      "StatusReasonDTO": {
+        "description": "Statü Bilgileri",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "string"
+          },
+          "description": {
+            "type": "string",
+            "example": "bahadir"
+          }
+        }
+      },
+      "PaymentCustomerIdentificationDTO": {
+        "description": "Payment Customer Identificition",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Kurum Kimlik Tipi",
+            "minLength": 1,
+            "maxLength": 35,
+            "example": "A"
+          },
+          "value": {
+            "type": "string",
+            "description": "Kurum Kimlik Değeri",
+            "minLength": 1,
+            "maxLength": 35,
+            "example": "TR640006400000000465340503"
+          }
+        }
+      },
+      "PaymentStatusReportDTO": {
+        "description": "kalite",
+        "type": "object",
+        "properties": {
+          "charges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentChargeDTO",
+              "description": "Komisyon Bilgisi"
+            }
+          },
+          "creationDateTime": {
+            "type": "string",
+            "description": "Mesaj Oluşturma Zamanı",
+            "example": "2019-02-07T08:11:46.271Z"
+          },
+          "creditor": {
+            "description": "Alıcı Bilgileri",
+            "type": "object",
+            "$ref": "#/components/schemas/PaymentCustomerDTO"
+          },
+          "paymentId": {
+            "type": "string",
+            "description": "PaymentId"
+          },
+          "paymentStatus": {
+            "type": "string",
+            "description": "Payment Status"
+          },
+          "statusReason": {
+            "description": "test",
+            "type": "object",
+            "$ref": "#/components/schemas/StatusReasonDTO"
+          }
+        }
+      },
+      "JWTToken": {
+        "description": "Token servis sonucunda dönen başarılı sonuç",
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "Token"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Token Type"
+          },
+          "expires_in": {
+            "type": "string",
+            "description": "Token kullanım süresi"
+          }
+        },
+        "xml": {
+          "name": "xml-test"
+        }
+      },
+      "UnAuthorizedMessage": {
+        "description": "Token Servis UnAthorized Mesajı",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentType": {
+        "type": "string",
+        "example": {
+          "P001": "Hesaba Ödeme",
+          "P002": "Karta Ödeme",
+          "P003": "Maaş Ödemesi",
+          "P004": "Kira Ödemesi",
+          "P005": "E-Ticaret Ödemesi",
+          "P006": "Kamu Ödemesi",
+          "P007": "Vergi Ödemesi",
+          "P008": "Fatura Ödemesi",
+          "P009": "Alışveriş Ödemesi",
+          "R001": "Hesaba İade",
+          "R002": "Karta İade",
+          "R003": "Maaş İadesi",
+          "R004": "Kira İadesi",
+          "R005": "E-Ticaret İadesi"
+        }
+      },
+      "PaymentSubType": {
+        "type": "string",
+        "example": {
+          "S01": "Aylık",
+          "S02": "Günlük",
+          "S03": "Saatlik",
+          "R01": "Konut",
+          "R02": "İşyeri",
+          "R03": "Taşıt",
+          "R04": "Diğer"
+        }
+      },
+      "PaymentChannel": {
+        "type": "string",
+        "example": {
+          "W00": "Web",
+          "W01": "Internet Bankacılığı",
+          "W02": "BEX",
+          "M00": "Mobil Uygulama",
+          "M01": "Mobil Cüzdan",
+          "M02": "Internet Bankacılığı",
+          "M03": "QR",
+          "A00": "ATM",
+          "A01": "QR",
+          "A02": "Kiosk",
+          "S00": "Şube",
+          "T00": "Telefon Bankacılığı",
+          "H00": "Host"
+        }
+      },
+      "PrivateId": {
+        "type": "string",
+        "example": {
+          "T": "TCKN",
+          "C": "CEP TELEFONU",
+          "K": "KART",
+          "A": "IBAN",
+          "P": "PASAPORT",
+          "E": "E-MAIL"
+        }
+      },
+      "OrganizationId": {
+        "type": "string",
+        "example": {
+          "T": "TCKN",
+          "V": "VKN",
+          "K": "KART",
+          "A": "IBAN"
+        }
+      },
+      "CurrencyCode": {
+        "type": "string",
+        "example": {
+          "TRY": "TRY"
+        }
+      }
+    },
+    "responses": {
+      "404NotFound": {
+        "description": "The spesific resouse was not found"
+      }
+    },
+    "examples": {
+      "UnAuthorizedExample": {
+        "value": {
+          "type": "https://www.baft.tech/problem/problem-with-message",
+          "title": "Unauthorized",
+          "status": "401",
+          "detail": "Bad credentials",
+          "path": "/api/v1/auth",
+          "message": "error.http.401"
+        }
+      }
+    }
+  }
+}
