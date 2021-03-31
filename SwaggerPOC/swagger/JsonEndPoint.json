@@ -407,13 +407,13 @@
             "type": "string",
             "minLength": 4,
             "maxLength": 50,
-            "description": "BKM tarafından kullanıcıya tanımlanmış kullanıcı adı bilgisi"
+            "description": " tarafından kullanıcıya tanımlanmış kullanıcı adı bilgisi"
           },
           "client_secret": {
             "type": "string",
             "minLength": 4,
             "maxLength": 100,
-            "description": "BKM tarafından kullanıcıya tanımlanmış unique Key bilgisi"
+            "description": " tarafından kullanıcıya tanımlanmış unique Key bilgisi"
           },
           "grant type": {
             "description": "Token type",
@@ -436,7 +436,7 @@
             "example": "2019-02-07T08:11:46.271Z"
           },
           "debtorAgent": {
-            "description": "Gönderici Katılımcı Bilgileri (Mesajın kaynağı olan Gönderici Katılımcıya ait üye kodunu             ifade eder. Üyenin BKM de tanımlı EFT Kodu olmalıdır.)",
+            "description": "Gönderici Katılımcı Bilgileri (Mesajın kaynağı olan Gönderici Katılımcıya ait üye kodunu             ifade eder. Üyeni de taımlı EFT Kodu olmalıdır.)",
             "type": "string",
             "minLength": 1,
             "maxLength": 35
