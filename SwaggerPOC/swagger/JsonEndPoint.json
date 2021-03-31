@@ -5,19 +5,19 @@
     "version": "0.1.9",
     "description": "Gateway API documentation.",
     "contact": {
-      "email": "SirilScrum@bkm.com.tr",
+      "email": "bozdemir@bkm.com.tr",
       "name": "SirilScrum",
-      "url": "https://bkm.com.tr/"
+      "url": "https://bozdemir.com.tr/"
     },
     "license": {
-      "name": "Bankalar Arası Kart Merkezi",
-      "url": "https://bkm.com.tr/"
+      "name": "Tart Merkezi",
+      "url": "https://bozdemir.com.tr/"
     }
   },
   "servers": [
     {
-      "url": "http://gateway-client-baft.cloudapps.bkm.local/",
-      "description": "Baft Servisleri"
+      "url": "",
+      "description": ""
     }
   ],
   "paths": {
